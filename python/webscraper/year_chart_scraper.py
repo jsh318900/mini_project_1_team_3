@@ -9,10 +9,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from time import sleep
 
-def yearchart(year):
+def yearchart(year, driver=None):
     options = webdriver.ChromeOptions()
     options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36')
-    driver = webdriver.Chrome()
+    
+    if driver is None:
+        driver = webdriver.Chrome(options=options)
+    else:
+        driver = webdriver.Chrome(driver, options=options)
     driver.get('https://www.melon.com/index.htm')
 
     driver.implicitly_wait(10)
@@ -168,5 +172,5 @@ def yearchart(year):
     
     ranks.extend(ranks_2)
     likes.extend(likes_2)
-
-    return list(zip(ranks, song_list)), singer_list, album_list, likes
+    driver.quit()
+    return list(zip(ranks, song_list, likes)), singer_list, album_list

@@ -9,7 +9,7 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Ge
 MELON_URL = 'https://www.melon.com/index.htm'
 OPTIONS = webdriver.ChromeOptions()
 OPTIONS.add_argument('user-agent=' + USER_AGENT)
-DRIVER_PATH = './chromedriver'
+DRIVER_PATH = './webscraper/chromedriver'
 DECADE_TO_ELEMENT_ID = {2000:'decade_3', 2010:'decade_2'}
 
 def initialize_driver(driver_path = DRIVER_PATH, options=OPTIONS):
@@ -116,6 +116,7 @@ def scrap_album_page(album_id, driver=None):
 
 	song_list = [a['href'] for a in soup.select('a.song_info')]
 	song_list = [x.split("'")[1] for x in song_list]
+
 
 	return {
 		'id': album_id,

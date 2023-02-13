@@ -13,13 +13,16 @@ for i in range(2):
     id = 'decade_{0}'.format(i+1)
     decade_to_element_id[year] = id
         
-def ten_year(year):
+def ten_year(year, driver=None):
     url = "https://www.melon.com/index.htm"
 
     options = webdriver.ChromeOptions()
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36")
 
-    driver = webdriver.Chrome(options=options)
+    if driver is not None:
+        driver = webdriver.Chrome(driver, options=options)
+    else:
+        driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -76,5 +79,5 @@ def ten_year(year):
         lst_singer.append(link_singer)
 
     total = list(zip(ranking, lst_s, lst_album))
-    
+    driver.quit()
     return total, lst_singer
