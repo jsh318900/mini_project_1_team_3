@@ -3,3 +3,4 @@ chromedriver
 *.ipynb
 __pycache__/
 chromedriver.exe
+.swp
